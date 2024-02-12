@@ -4,7 +4,7 @@
 
 // Make sure to paste the code into the index.html section
 
-
+// This will not work as well on google sites but it can still be used
 
 
 <!DOCTYPE html>
