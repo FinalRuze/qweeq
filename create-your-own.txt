@@ -1,4 +1,4 @@
-// Using this to create your own IDE-Ware site will allow you to get updates consistently and without the need of copying the code constently
+// Using this to create your own IDE-Ware site and it will allow you to get updates consistently and without the need of copying the code constently
 
 // Some examples where you can use this are https://glitch.com, https://playcode.io, and https://jsitor.com
 
