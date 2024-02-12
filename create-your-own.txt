@@ -12,8 +12,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Classroom</title>
-    <link rel="icon" href="https://lh5.googleusercontent.com/RkbS5xg4OfFn4nCPVw7Ao3MGZ5Yv5A4iPNAuNxT9h0umcS_SgGf5HO9qScTb8Pv_GuTd8uLhfKtfTC19ZU3t6pkfU_ugMYY9m3sWgm6OHYvipfzH" type="image/png">
+    <title>Google Classroom</title> <!-- Change this to whatever title you want! (optional) -->
+    <link rel="icon" href="https://lh5.googleusercontent.com/RkbS5xg4OfFn4nCPVw7Ao3MGZ5Yv5A4iPNAuNxT9h0umcS_SgGf5HO9qScTb8Pv_GuTd8uLhfKtfTC19ZU3t6pkfU_ugMYY9m3sWgm6OHYvipfzH" type="image/png"> <!-- Change this to whatever image/icon you want! (optional) -->
 </head>
 </html>
 
