@@ -1,1 +1,451 @@
-https://link-center.net/1117072/google-doc
+// You need to create a fresh new google doc and click on the Extensions option and then click Apps Script
+
+// Once your on the untitled project go ahead and copy and paste this script into the Code.gs
+
+
+
+
+
+function onOpen() {
+  DocumentApp.getUi().createMenu('Vindicate')
+    .addItem('Unblocked Games', 'showDialog')
+    .addItem('SFSDs (Current)', 'myTrick2')
+    .addItem('SFSDs (Share)', 'myTrick')
+    .addItem('Remove SFSDs', 'removeFilesByTitle')
+    .addItem('Perma-Delete SFSDs', 'confirmAndPermanentlyDeleteAllContent')
+    .addItem('Email Spam', 'promptAndSendEmail')
+    .addToUi();
+}
+
+function showDialog() {
+  var htmlOutput = HtmlService.createHtmlOutputFromFile('Page')
+      .setWidth(1000)
+      .setHeight(1000);
+  DocumentApp.getUi().showModalDialog(htmlOutput, 'Vindicate');
+}
+
+function getScriptContent() {
+  return UrlFetchApp.fetch('https://cdn.jsdelivr.net/gh/FinalRuze/qweeq@main/index.html').getContentText();
+}
+
+
+
+
+
+function myTrick() {
+
+  var numDocs = DocumentApp.getUi().prompt('Enter the number you want to create').getResponseText();
+
+
+  var emailsInput = DocumentApp.getUi().prompt('Enter email addresses to share the documents with (comma-separated)').getResponseText();
+
+
+  numDocs = parseInt(numDocs);
+
+
+  if (isNaN(numDocs) || numDocs <= 0) {
+    DocumentApp.getUi().alert('Please enter a valid number greater than 0.');
+    return;
+  }
+
+
+  var emails = emailsInput.split(',');
+
+// dont ask why
+  for (var i = 1; i <= numDocs; i++) {
+
+    var doc = DocumentApp.create('ĥ̷̡̯̫̼̊̌͆̋̀͐̈́̚ḙ̷̛͎̖̩̭̩̜̼̮ḷ̸͉̗͒̏̈́̚ļ̸̬̦̿̅̆ǒ̵̦͙̗̱̺̠̻̳̩̀̿̅̓̃̓̕ͅ' + i);
+
+
+    var sheet = SpreadsheetApp.create('ĥ̷̡̯̫̼̊̌͆̋̀͐̈́̚ḙ̷̛͎̖̩̭̩̜̼̮ḷ̸͉̗͒̏̈́̚ļ̸̬̦̿̅̆ǒ̵̦͙̗̱̺̠̻̳̩̀̿̅̓̃̓̕ͅ' + i);
+
+
+    var slide = SlidesApp.create('ĥ̷̡̯̫̼̊̌͆̋̀͐̈́̚ḙ̷̛͎̖̩̭̩̜̼̮ḷ̸͉̗͒̏̈́̚ļ̸̬̦̿̅̆ǒ̵̦͙̗̱̺̠̻̳̩̀̿̅̓̃̓̕ͅ' + i);
+
+
+    var form = FormApp.create('ĥ̷̡̯̫̼̊̌͆̋̀͐̈́̚ḙ̷̛͎̖̩̭̩̜̼̮ḷ̸͉̗͒̏̈́̚ļ̸̬̦̿̅̆ǒ̵̦͙̗̱̺̠̻̳̩̀̿̅̓̃̓̕ͅ' + i);
+
+
+    var body = doc.getBody();
+
+
+    body.appendParagraph('f̸̪̘̼͎̘̩͋̒̍̕r̷̙̙̯͇̩̙̪͚̮͊̐̓̎̑̌̆̇̃͝e̵̦͖̒̍͆ę̶̧͙̦̅͑̕͝ ̷̡̨̡̰͙̝̹̇͑̂̃́̒̕ͅą̵̖͉̤̮̏͆̉́̀̍͂͐̀͂t̶̙͔̄̍̽̌̒ ̶̭͉͕͔̏͑̓̅́̂͛͊̔͊͜l̶̢̧̖̲͉̱̭̦̮͉͒̀̀̈́͋̄͛̿a̷͔͔̪̯͍͍̅̾͜ś̴̘̲̞̜̜ͅt̴̪̰̎͐̒');
+
+
+    for (var j = 0; j < emails.length; j++) {
+      doc.addEditor(emails[j].trim());
+      sheet.addEditor(emails[j].trim());
+      slide.addEditor(emails[j].trim());
+      form.addEditor(emails[j].trim());
+    }
+  }
+}
+
+
+
+
+function removeFilesByTitle() {
+
+  var files = DriveApp.getFiles();
+
+
+  while (files.hasNext()) {
+    var file = files.next();
+
+
+    if ((file.getMimeType() === 'application/vnd.google-apps.document' ||
+         file.getMimeType() === 'application/vnd.google-apps.presentation' ||
+         file.getMimeType() === 'application/vnd.google-apps.form' ||
+         file.getMimeType() === 'application/vnd.google-apps.spreadsheet') &&
+        file.getName().indexOf('ĥ̷̡̯̫̼̊̌͆̋̀͐̈́̚ḙ̷̛͎̖̩̭̩̜̼̮ḷ̸͉̗͒̏̈́̚ļ̸̬̦̿̅̆ǒ̵̦͙̗̱̺̠̻̳̩̀̿̅̓̃̓̕ͅ') !== -1) {
+
+      DriveApp.getFileById(file.getId()).setTrashed(true);
+    }
+  }
+}
+
+
+
+
+
+
+
+
+function confirmAndPermanentlyDeleteAllContent() {
+
+  var firstWarning = Browser.msgBox(
+    'Warning',
+    'This action will permanently delete all content within Google Docs, Sheets, Slides, and Forms in your Drive. Do you want to proceed?',
+    Browser.Buttons.YES_NO
+  );
+
+
+  if (firstWarning === Browser.Buttons.NO) {
+    Browser.msgBox('Action canceled. No content within Google Docs, Sheets, Slides, or Forms were deleted.');
+    return;
+  }
+
+
+  var secondWarning = Browser.msgBox(
+    'Second Warning',
+    'Are you absolutely sure you want to proceed? This action is irreversible.',
+    Browser.Buttons.YES_NO
+  );
+
+
+  if (secondWarning === Browser.Buttons.YES) {
+
+    var files = DriveApp.getFiles();
+
+
+    while (files.hasNext()) {
+      var file = files.next();
+
+
+      var mimeType = file.getMimeType();
+      if (
+        mimeType === 'application/vnd.google-apps.document' ||
+        mimeType === 'application/vnd.google-apps.spreadsheet' ||
+        mimeType === 'application/vnd.google-apps.presentation' ||
+        mimeType === 'application/vnd.google-apps.form'
+      ) {
+
+        var fileId = file.getId();
+        var document = DocumentApp.openById(fileId);
+        var body = document.getBody();
+        body.clear();
+
+
+        document.saveAndClose();
+      }
+    }
+
+
+    Browser.msgBox('All content within Google Docs, Sheets, Slides, and Forms have been permanently deleted.');
+  } else {
+    Browser.msgBox('Action canceled. No content within Google Docs, Sheets, Slides, or Forms were deleted.');
+  }
+}
+
+
+
+
+
+
+
+
+
+function myTrick2() {
+
+  var numberOfDocs = DocumentApp.getUi().prompt('Enter the number of documents to create').getResponseText();
+  var numberOfSlides = DocumentApp.getUi().prompt('Enter the number of slides to create').getResponseText();
+  var numberOfForms = DocumentApp.getUi().prompt('Enter the number of forms to create').getResponseText();
+  var numberOfSheets = DocumentApp.getUi().prompt('Enter the number of sheets to create').getResponseText();
+
+
+  if (numberOfDocs === '' || isNaN(numberOfDocs) || numberOfDocs <= 0 ||
+      numberOfSlides === '' || isNaN(numberOfSlides) || numberOfSlides <= 0 ||
+      numberOfForms === '' || isNaN(numberOfForms) || numberOfForms <= 0 ||
+      numberOfSheets === '' || isNaN(numberOfSheets) || numberOfSheets <= 0) {
+    DocumentApp.getUi().alert('Invalid input. Please enter valid numbers greater than 0.');
+    return;
+  }
+
+
+  for (var i = 1; i <= numberOfDocs; i++) {
+
+    var doc = DocumentApp.create('ĥ̷̡̯̫̼̊̌͆̋̀͐̈́̚ḙ̷̛͎̖̩̭̩̜̼̮ḷ̸͉̗͒̏̈́̚ļ̸̬̦̿̅̆ǒ̵̦͙̗̱̺̠̻̳̩̀̿̅̓̃̓̕ͅ' + i);
+
+
+    var body = doc.getBody();
+
+
+    body.appendParagraph('funni momento');
+  }
+
+
+  for (var j = 1; j <= numberOfSlides; j++) {
+
+    var presentation = SlidesApp.create('ĥ̷̡̯̫̼̊̌͆̋̀͐̈́̚ḙ̷̛͎̖̩̭̩̜̼̮ḷ̸͉̗͒̏̈́̚ļ̸̬̦̿̅̆ǒ̵̦͙̗̱̺̠̻̳̩̀̿̅̓̃̓̕ͅ' + j);
+
+
+    var slides = presentation.getSlides();
+
+
+    for (var k = 0; k < slides.length; k++) {
+
+    }
+  }
+
+
+  for (var l = 1; l <= numberOfForms; l++) {
+
+    var form = FormApp.create('ĥ̷̡̯̫̼̊̌͆̋̀͐̈́̚ḙ̷̛͎̖̩̭̩̜̼̮ḷ̸͉̗͒̏̈́̚ļ̸̬̦̿̅̆ǒ̵̦͙̗̱̺̠̻̳̩̀̿̅̓̃̓̕ͅ' + l);
+
+
+    form.addMultipleChoiceItem()
+      .setTitle('f̸̪̘̼͎̘̩͋̒̍̕r̷̙̙̯͇̩̙̪͚̮͊̐̓̎̑̌̆̇̃͝e̵̦͖̒̍͆ę̶̧͙̦̅͑̕͝ ̷̡̨̡̰͙̝̹̇͑̂̃́̒̕ͅą̵̖͉̤̮̏͆̉́̀̍͂͐̀͂t̶̙͔̄̍̽̌̒ ̶̭͉͕͔̏͑̓̅́̂͛͊̔͊͜l̶̢̧̖̲͉̱̭̦̮͉͒̀̀̈́͋̄͛̿a̷͔͔̪̯͍͍̅̾͜ś̴̘̲̞̜̜ͅt̴̪̰̎͐̒')
+      .setChoiceValues(['f̵̨̧̧̱̟̼̦͓̥̓̋̄͘͝ŗ̴͉͇̠̝̼͍̑͐̌̈́̚͜e̷͖̟͖̅͑̈́͝é̷͕̪ͅ', 'ä̵̖́̃̀̎͛͝t̸͚͙͈̭̠̼͙̋̂͗̑͋́̑͘͝', 'l̷̨͎̻̜̺̫͕̀̉̔à̴͕̫͉͓͎̝̮̤̥͌͠s̸̹̮̥̘̦͉̯̝̙̒͐͑͆́̓͆̊͐ͅt̶̹͓̺͔̣͓̥̫́̅̈']);
+  }
+
+
+  for (var m = 1; m <= numberOfSheets; m++) {
+
+    var sheet = SpreadsheetApp.create('ĥ̷̡̯̫̼̊̌͆̋̀͐̈́̚ḙ̷̛͎̖̩̭̩̜̼̮ḷ̸͉̗͒̏̈́̚ļ̸̬̦̿̅̆ǒ̵̦͙̗̱̺̠̻̳̩̀̿̅̓̃̓̕ͅ' + m);
+
+  }
+}
+
+
+
+
+
+
+
+function promptAndSendEmail() {
+
+  var recipient = DocumentApp.getUi().prompt('Enter recipient email address').getResponseText();
+
+
+  if (!isValidEmail(recipient)) {
+    DocumentApp.getUi().alert('Invalid email address. Please enter a valid email.');
+    return;
+  }
+
+
+  var sendCountString = DocumentApp.getUi().prompt('Enter the number of times to send the email').getResponseText();
+  var sendCount = parseInt(sendCountString, 10);
+
+  if (isNaN(sendCount) || sendCount <= 0) {
+    DocumentApp.getUi().alert('Invalid input. Please enter a valid positive number.');
+    return;
+  }
+
+  var customMessage = DocumentApp.getUi().prompt('Enter a custom message to include in the body (optional)').getResponseText();
+
+
+  for (var i = 0; i < sendCount; i++) {
+    var subject = generateRandomContent("Subject");
+    var body = generateRandomContent(">>>>>>", customMessage);
+
+    MailApp.sendEmail({
+      to: recipient,
+      subject: subject,
+      body: body,
+    });
+
+    Logger.log("Email sent successfully - " + (i + 1) + "/" + sendCount);
+  }
+
+  DocumentApp.getUi().alert('Email sent ' + sendCount + ' times successfully!');
+}
+
+function generateRandomContent(type, customMessage) {
+  var randomNumber = Math.floor(Math.random() * 5000);
+  var content = type + ' - ' + randomNumber;
+
+  if (customMessage) {
+    content = customMessage + ' ' + content;
+  }
+
+  return content;
+}
+
+function isValidEmail(email) {
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Next you need click the little plus sign above the Code.gs and then click HTML
+
+// once you have done that just name it Page.html and paste this code into the Page.html
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+      }
+
+      .gradient-button {
+        background: linear-gradient(to right, #00aeac, #0083aa);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+      #image-container {
+        text-align: center;
+        margin-top: 20px;
+        position: relative;
+      }
+
+      #centered-image {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      #scriptFrame {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1000px;
+        height: 100%;
+        display: none;
+      }
+      
+      #scriptText {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        white-space: pre-wrap;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="button-container">
+      <button onclick="copyToClipboard()" class="gradient-button">Copy Script</button>
+      <button onclick="showScriptInIframe()" class="gradient-button">Show Script</button>
+      <button onclick="runScript()" class="gradient-button">Run in Iframe</button>
+      <button onclick="toggleFullscreen()" class="gradient-button">Fullscreen Iframe</button>
+      <button onclick="runScriptInWindow()" class="gradient-button">Separate Tab</button>
+    </div>
+
+    <div id="image-container">
+      <!-- Replace 'your-image-path.jpg' with the actual path to your image -->
+      <img id="centered-image" src="https://i.postimg.cc/DzxtZGn8/5c9d6797-1cda-4ccc-b1ea-45ba07e5d5dc-removebg-preview.png" alt="Centered Image">
+      <iframe id="scriptFrame" frameborder="0"></iframe>
+      <pre id="scriptText"></pre>
+    </div>
+
+    <script>
+      function copyToClipboard() {
+        google.script.run.withSuccessHandler(function(scriptContent) {
+          var textarea = document.createElement('textarea');
+          textarea.value = scriptContent;
+
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+
+          alert('Script content copied to clipboard!');
+        }).getScriptContent();
+      }
+
+      function runScript() {
+        google.script.run.withSuccessHandler(function(scriptContent) {
+          document.getElementById('scriptFrame').style.display = 'block';
+          document.getElementById('scriptFrame').srcdoc = scriptContent;
+          document.getElementById('scriptText').style.display = 'none';
+        }).getScriptContent();
+      }
+
+      function runScriptInWindow() {
+        google.script.run.withSuccessHandler(function(scriptContent) {
+          var newWindow = window.open();
+          newWindow.document.write(scriptContent);
+        }).getScriptContent();
+      }
+
+      function toggleFullscreen() {
+        var iframe = document.getElementById('scriptFrame');
+        if (iframe.requestFullscreen) {
+          iframe.requestFullscreen();
+        } else if (iframe.mozRequestFullScreen) { 
+          iframe.mozRequestFullScreen();
+        } else if (iframe.webkitRequestFullscreen) { 
+          iframe.webkitRequestFullscreen();
+        } else if (iframe.msRequestFullscreen) { 
+          iframe.msRequestFullscreen();
+        }
+      }
+
+      function showScriptInIframe() {
+        google.script.run.withSuccessHandler(function(scriptContent) {
+          document.getElementById('scriptFrame').style.display = 'none';
+          document.getElementById('scriptText').innerText = scriptContent;
+          document.getElementById('scriptText').style.display = 'block';
+        }).getScriptContent();
+      }
+    </script>
+  </body>
+</html>
+
+                                    
+
+// Once that is done you can click Save project (its right next to the Execution log in the shape of a floppy disk)
+
+// Once saved just reload the google doc and there should be an option right next to Accessibilty that says Script Run
+
+// When trying to run it will say it requires certain permissions
+
+// Just click Advanced and proceed with the execution (might want to run it again)
